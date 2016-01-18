@@ -1,13 +1,7 @@
-FROM alpine
+FROM rastasheep/ubuntu-sshd:latest
 MAINTAINER Arnie97 <arnie97@gmail.com>
 ENV VERSION 1.1.3
 ENV ARCH amd64
-
-# install and configure ssh server
-RUN apk update && apk add openssl openssh
-RUN sed -i 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN ssh-keygen -A
-RUN echo 'root:password' | chpasswd
 
 # install the chisel http tunnel
 WORKDIR /tmp
@@ -17,7 +11,6 @@ RUN tar -xzvf chisel.tgz ${PATH_NAME}/chisel
 RUN mv ${PATH_NAME}/chisel /usr/local/bin
 
 # clean up
-RUN apk del openssl
 RUN rm -rf ${PATH_NAME}
 
 # add a startup script
