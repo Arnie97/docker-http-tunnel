@@ -1,7 +1,7 @@
 FROM alpine
 MAINTAINER Arnie97 <arnie97@gmail.com>
 ENV VERSION 1.1.3
-ENV ARCH 386
+ENV ARCH amd64
 
 # install and configure ssh server
 RUN apk update && apk add openssl openssh
