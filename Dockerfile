@@ -14,11 +14,7 @@ RUN mv ${PATH_NAME}/chisel /usr/local/bin
 RUN rm -rf ${PATH_NAME}
 
 # add a startup script
-WORKDIR /usr/local/bin
-RUN echo '#!/bin/sh'          >> forward
-RUN echo '/usr/sbin/sshd -D&' >> forward
-RUN echo 'chisel server'      >> forward
-RUN chmod +x                     forward
+COPY forward /usr/local/bin
 
 CMD ["/bin/sh", "-c", "/usr/local/bin/forward"]
 EXPOSE 8080
