@@ -25,8 +25,9 @@ RUN ln -sf /dev/stderr /var/log/nginx/error.log
 # clean up
 RUN rm -rf ${PATH_NAME} /var/lib/apt/lists/*
 
-# add a startup script
+# import config files
 COPY forward /usr/local/bin
+COPY readcolor.conf /etc/nginx/conf.d
 
 CMD ["/bin/sh", "-c", "/usr/local/bin/forward"]
 EXPOSE 8080
