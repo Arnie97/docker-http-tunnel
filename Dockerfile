@@ -28,6 +28,7 @@ RUN rm -rf ${PATH_NAME} /var/lib/apt/lists/*
 # import config files
 COPY forward /usr/local/bin
 COPY readcolor.conf /etc/nginx/conf.d
+COPY alive /etc/cron.daily
 
 CMD ["/bin/sh", "-c", "/usr/local/bin/forward"]
 EXPOSE 8080
