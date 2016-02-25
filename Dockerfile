@@ -10,8 +10,8 @@ RUN wget   -O chisel.tgz https://github.com/jpillora/chisel/releases/download/${
 RUN tar -xzvf chisel.tgz ${PATH_NAME}/chisel
 RUN mv ${PATH_NAME}/chisel /usr/local/bin
 
-# clean up
-RUN rm -rf ${PATH_NAME}
+# install cow
+RUN curl -L git.io/cow | bash
 
 # add a startup script
 COPY forward /usr/local/bin

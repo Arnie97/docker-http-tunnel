@@ -1,3 +1,9 @@
 #!/bin/sh
 /usr/sbin/sshd
-chisel server
+mkdir -p ~/.cow
+echo "listen = http://localhost:80" > ~/.cow/rc
+if [ "$UPSTREAM_PROXY" ]; then
+    echo "proxy = $UPSTREAM_PROXY" >> ~/.cow/rc
+fi
+cow&
+chisel server --proxy http://localhost
