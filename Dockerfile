@@ -23,7 +23,7 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log
 RUN ln -sf /dev/stderr /var/log/nginx/error.log
 
 # clean up
-RUN rm -rf ${PATH_NAME} /var/lib/apt/lists/*
+RUN rm -rf chisel.tgz ${PATH_NAME} /var/lib/apt/lists/*
 
 # import config files
 COPY forward /usr/local/bin
