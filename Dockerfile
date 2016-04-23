@@ -43,7 +43,7 @@ WORKDIR ../
 
 # build llvm with cling
 RUN ./configure --enable-optimized --enable-targets=host-only --disable-assertions --prefix=/usr/local
-RUN make
+RUN make -j `nproc`
 RUN make install
 WORKDIR ../
 
