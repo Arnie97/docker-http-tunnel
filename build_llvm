@@ -1,0 +1,14 @@
+#!/bin/sh
+
+git clone http://root.cern.ch/git/llvm.git -b cling-patches --depth=1
+(cd llvm
+    (cd tools
+        git clone http://root.cern.ch/git/clang.git -b cling-patches --depth=1
+        git clone http://root.cern.ch/git/cling.git --depth=1
+    )
+
+    ./configure --prefix=/usr/local \
+        --enable-optimized --enable-targets=host-only --disable-assertions
+    make -j `nproc`
+    make install
+)

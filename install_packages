@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# install prerequisite packages
+apt-get -qy install curl zsh software-properties-common
+
+# enable multiverse
+sed -i 's/universe$/universe multiverse/g' /etc/apt/sources.list
+
+# import ppa sources
+for repo in \
+    nginx/development chris-lea/node.js ubuntu-toolchain-r/test; \
+do add-apt-repository -y ppa:$repo; done
+
+# install packages via curl (imply 'apt-get update')
+for script in \
+    get.docker.com \
+    static.rust-lang.org/rustup.sh \
+    raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh; \
+do curl -fsSL https://$script | bash; done
+
+# install packages via apt
+apt-get -qy install \
+    nginx screen tmux vim netcat aptitude apt-file \
+    man-db manpages-posix-dev racket haskell-platform \
+    nodejs python-pip python3-pip ruby2.0 rake php5 \
+    golang nasm cmake gdb g++-5 g++-mingw-w64 \
+    g++-arm-linux-gnueabi g++-arm-linux-gnueabihf
+
+# import dotfiles
+sed -i 's/^ZSH_THEME="robbyrussell"$/ZSH_THEME="af-magic"/' ~/.zshrc
+sed -i 's/archive/cn.archive/g' /etc/apt/sources.list
+git clone https://github.com/Arnie97/dotfiles
+cp dotfiles/.gitconfig dotfiles/.vimrc ~/
