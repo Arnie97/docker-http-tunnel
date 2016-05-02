@@ -29,12 +29,11 @@ WORKDIR ../
 
 # build llvm with cling while installing other packages via apt
 RUN apt-get -q update && apt-get -qy install \
-        nginx screen tmux git zsh vim curl netcat \
+        nginx screen tmux zsh vim curl netcat \
         aptitude apt-file man-db manpages-posix-dev \
         nodejs python-pip python3-pip ruby2.0 rake php5 \
         nasm golang racket haskell-platform cmake gdb \
-        gcc-5 gcc-arm-linux-gnueabi gcc-arm-linux-gnueabihf \
-        gdb-mingw-w64-target gcc-mingw-w64-i686 gcc-mingw-w64-x86-64 & \
+        g++-5 g++-mingw-w64 g++-arm-linux-gnueabi g++-arm-linux-gnueabihf & \
     ./configure --prefix=/usr/local --disable-assertions \
         --enable-optimized --enable-targets=host-only && \
     make -j `nproc` && make install
